@@ -1,0 +1,69 @@
+<?page title="Karyawan Edit" contentType="text/html;charset=UTF-8"?>
+<?init class="vmd.AuthCheckerVmd" ?>
+<zk>
+<window title="Karyawan Edit" border="normal" 
+			apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vmd.KaryawanEditVmd')">
+	
+		<hlayout>
+			<button label="back" onClick="@command('back')" />
+			<button label="save" onClick="@command('save')" />
+		</hlayout>
+		
+		<space />
+		
+		<grid>
+			<columns>
+				<column label="" width="250px" />
+				<column label="" width="300px" />
+			</columns>
+			
+			<rows>
+				<row>
+					<label value="Id Karyawan" />
+					<textbox constraint="no empty : harus diisi" 
+						value="@load(vm.mstKaryawanDto.id) @save(vm.mstKaryawanDto.id, before='save')" 
+						readonly="@load(vm.mstKaryawanDto.id eq null ? false : true)" />
+				</row>
+				
+				<row>
+					<label value="Nama Karyawan" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstKaryawanDto.namaKaryawan)" />
+				</row>
+				
+				<row>
+					<label value="Jenis Kelamin" />
+					<radiogroup id="rg2"  selectedItem="@bind(vm.genderChoice)" >
+							<radio radiogroup="rg2" value="M" label="Male" />
+							<radio radiogroup="rg2" value="F" label="Female" />
+					</radiogroup>
+				</row>
+				
+				<row>
+					<label value=" Tanggal Lahir" />
+					<datebox constraint="no empty : harus diisi" 
+							value="@bind(vm.mstKaryawanDto.dateOfBirth)" />
+				</row>
+				
+				<row>
+					<label value="Tempat Lahir" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstKaryawanDto.birthPlace)" />
+				</row>
+				
+				<row>
+					<label value="Department" />
+					<combobox constraint="no empty : harus diisi" 
+						model="@load(vm.listDepartment)"
+						selectedItem="@save(vm.mstDepartmentDto)" 
+						value="@load(vm.mstKaryawanDto.department.deptName)" >
+						<template name="model">
+							<comboitem label="@load(each.deptName)" 
+								value="@load(each.id)"/>
+						</template>
+					</combobox>
+				</row>
+			</rows>
+		</grid>
+	
+</window>
+</zk>

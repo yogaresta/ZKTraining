@@ -1,0 +1,43 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?init class="vmd.AuthCheckerVmd" ?>
+<zk>
+<window title="Customer Edit" border="normal" 
+			apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vmd.CustomerEditVmd')">
+	
+		<hlayout>
+			<button label="back" onClick="@command('back')" />
+			<button label="save" onClick="@command('save')" />
+		</hlayout>
+		
+		<space />
+		
+		<grid>
+			<columns>
+				<column label="" width="250px" />
+				<column label="" width="300px" />
+			</columns>
+			
+			<rows>
+				<row>
+					<label value="Id Customer" />
+					<textbox constraint="no empty : harus diisi" 
+						value="@load(vm.mstCustomerDto.id) @save(vm.mstCustomerDto.id, before='save')" 
+						readonly="@load(vm.mstCustomerDto.id eq null ? false : true)" />
+				</row>
+				
+				<row>
+					<label value="Nama Customer" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstCustomerDto.namaCustomer)" />
+				</row>
+			
+				<row>
+					<label value="Kota Customer" />
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.mstCustomerDto.birthPlace)" />
+				</row>
+				
+			</rows>
+		</grid>
+	
+</window>
+</zk>

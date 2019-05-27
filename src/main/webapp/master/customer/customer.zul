@@ -1,0 +1,33 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?init class="vmd.AuthCheckerVmd" ?>
+<zk>
+<window title="Customer" border="normal" 
+			apply="org.zkoss.bind.BindComposer" 
+			viewModel="@id('vm') @init('vmd.CustomerVmd')">
+			
+			<hlayout>
+				<button label="add" onClick="@command('add')" />
+				<button label="edit" onClick="@command('edit')" />
+				<button label="delete" onClick="@command('delete')" />
+			</hlayout>
+			
+			<space />
+			
+			<listbox model="@load(vm.listCustomer)" 
+							 selectedItem="@bind(vm.mstCustomerDto)">
+					<listhead>
+						<listheader label="Id Customer" sort="auto" />
+						<listheader label="Nama Customer" sort="auto" />
+						<listheader label="Kota Customer" sort="auto" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.id)" />
+							<listcell label="@load(each.namaCustomer)" />
+							<listcell label="@load(each.namaCustomer)" />
+						</listitem>
+					</template>
+			</listbox>
+			
+</window>
+</zk>
